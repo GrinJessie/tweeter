@@ -4,6 +4,7 @@
 const simulateDelay = require("./util/simulate-delay");
 
 // Defines helper functions for saving and getting tweets, using the database `db`
+//❓❓❓❓ export the object with only two functions? And up top const db = require(db file address)?
 module.exports = function makeDataHelpers(db) {
   return {
 
