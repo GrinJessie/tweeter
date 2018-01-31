@@ -40,16 +40,90 @@ body {
   background-color: #eeee;
 }
 
-main section h2 {
+.new-tweet h2 {
   border-bottom: 1px solid grey;
   margin-top: 0;
 }
 
-textarea {
+.new-tweet textarea {
   width: 100%;
   padding: 5px;
 }
 
-form span {
+.new-tweet span {
   float: right;
 }
+
+.overlimit {
+  color: red;
+}
+
+.tweet {
+  margin: auto;
+  margin-top: 50px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+}
+
+.tweet header {
+  background-color: #eeee;
+  padding: 0.5em;
+}
+
+/*❗❗❗❗trigger :hober specific element{property value}*/
+
+.tweet:hover header{
+  background-color: #dddd;
+
+}
+
+.tweet header img {
+  border-radius: 4px;
+  vertical-align: middle;
+  opacity: 0.5;
+}
+
+.tweet:hover header img {
+  opacity: 1;
+
+}
+
+.tweet header h2 {
+  display: inline;
+  vertical-align: top;
+  padding-left: 0.3em;
+}
+
+.tweet > header > span {
+  float: right;
+}
+
+.tweet > p {
+  border-bottom: 1px solid #eeee;
+  margin: 0;
+  padding: 2em 0.5em;
+}
+
+.tweet footer {
+  overflow: hidden;
+}
+
+.tweet > footer > p {
+  display: inline-flex;
+  padding: 0.5em;
+  font-size: small;
+  margin: 0;
+}
+
+.tweet footer i {
+  /*display: none;*/
+  float: right;
+  padding-right: 0.5em;
+  /*padding-top: 0.5em;*/
+}
+
+.tweet:hover footer i {
+  display: inline-block;
+  color: #00a087;
+}
+
