@@ -29,7 +29,7 @@ body {
   width: 450px;
   margin:auto;
   background-color: white;
-  padding: 140px 30px 100%;
+  padding: 140px 30px;
 }
 
 .new-tweet {
@@ -116,10 +116,10 @@ body {
 }
 
 .tweet footer i {
-  /*display: none;*/
+  display: none;
   float: right;
   padding-right: 0.5em;
-  /*padding-top: 0.5em;*/
+  padding-top: 0.5em;
 }
 
 .tweet:hover footer i {
