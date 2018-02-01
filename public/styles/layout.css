@@ -1,151 +1,112 @@
-/*
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
- */
 html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+  box-sizing: border-box; }
 
-/*
- * Global layout stuff
- */
+*, *:before, *:after {
+  box-sizing: inherit; }
 
 body {
   margin: 0;
   color: #244751;
   background-color: #eee;
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+  font-family: 'Roboto Condensed', sans-serif; }
 
 .container {
   width: 450px;
-  margin:auto;
+  margin: auto;
   background-color: white;
-  padding: 140px 30px;
-}
+  padding: 140px 30px; }
 
 /*----------    post new tweet     ------------*/
-
 .new-tweet {
   margin: auto;
   border: 1px solid lightgrey;
   border-radius: 8px;
   padding: 15px 1em 10px;
-  background-color: #eeee;
-}
+  background-color: #eeee; }
 
 .new-tweet h2 {
   border-bottom: 1px solid grey;
-  margin-top: 0;
-}
+  margin-top: 0; }
 
 .new-tweet textarea {
   width: 100%;
-  padding: 5px;
-}
+  padding: 5px; }
 
 .new-tweet span {
-  float: right;
-}
+  float: right; }
 
 .overlimit {
-  color: red;
-}
-
+  color: red; }
 
 /*---------    section displaying tweets    ----------*/
 .tweet {
   margin: auto;
   margin-top: 50px;
   border: 1px solid lightgrey;
-  border-radius: 8px;
-}
+  border-radius: 8px; }
 
 .tweet header {
   background-color: #eeee;
-  padding: 0.5em;
-}
+  padding: 0.5em; }
 
-
-.tweet:hover header{
-  background-color: #dddd;
-
-}
+.tweet:hover header {
+  background-color: #dddd; }
 
 .tweet header img {
   border-radius: 4px;
   vertical-align: middle;
-  opacity: 0.5;
-}
+  opacity: 0.5; }
 
 .tweet:hover header img {
-  opacity: 1;
-
-}
+  opacity: 1; }
 
 .tweet header h2 {
   display: inline;
   vertical-align: top;
-  padding-left: 0.3em;
-}
+  padding-left: 0.3em; }
 
 .tweet > header > span {
-  float: right;
-}
+  float: right; }
 
 .tweet > p {
   border-bottom: 1px solid #eeee;
   margin: 0;
-  padding: 2em 0.5em;
-}
+  padding: 2em 0.5em; }
 
 .tweet footer {
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 .tweet > footer > p {
   display: inline-flex;
   padding: 0.5em;
   font-size: small;
-  margin: 0;
-}
+  margin: 0; }
 
 .tweet footer i {
   display: none;
   float: right;
   padding-right: 0.5em;
-  padding-top: 0.5em;
-}
+  padding-top: 0.5em; }
 
 .tweet:hover footer i {
   display: inline-block;
-  color: #00a087;
-}
+  color: #00a087; }
 
 /*----------      flash message        ----------*/
-.flash-message {
+#flash-message {
   background-color: #eeeeff;
   margin: auto;
   margin-bottom: 20px;
   width: 400px;
   padding: 0.8em;
-  border-radius: 5px;
-}
+  border-radius: 5px; }
 
-.flash-message > p {
-  display: inline-flex;
-}
+#flash-message > p {
+  display: inline-flex; }
 
-.flash-message > button {
+#flash-message > button {
   /*float: righst;*/
   background-color: #eeeeff;
-  border: none;
-}
+  border: none; }
+
+/*# sourceMappingURL=layout.css.map */

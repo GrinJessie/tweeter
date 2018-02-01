@@ -7,24 +7,19 @@ nav {
   height: 80px;
   background-color: #00a087;
   color: #e8fdff;
-  padding: 0 2em;
-}
+  padding: 0 2em; }
 
-nav > img {
+nav img {
   width: 80px;
   height: 80px;
-  float: left;
-}
-
-nav > span {
+  float: left; }
+nav span {
   float: left;
   margin-left: 10px;
   font-size: 2em;
   line-height: 80px;
   height: 100%;
-  vertical-align: middle;
-}
-
+  vertical-align: middle; }
 nav .composeBtn {
   background-color: #b7f7e5;
   border: 0.5px solid black;
@@ -32,10 +27,8 @@ nav .composeBtn {
   border-radius: 7px;
   float: right;
   margin-top: 0.75em;
-  outline: none;
-}
-
+  outline: none; }
 nav .composeBtn:hover {
-  background-color: #eeee;
-}
+  background-color: #eeee; }
 
+/*# sourceMappingURL=test.css.map */
