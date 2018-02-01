@@ -32,6 +32,8 @@ body {
   padding: 140px 30px;
 }
 
+/*----------    post new tweet     ------------*/
+
 .new-tweet {
   margin: auto;
   border: 1px solid lightgrey;
@@ -58,6 +60,8 @@ body {
   color: red;
 }
 
+
+/*---------    section displaying tweets    ----------*/
 .tweet {
   margin: auto;
   margin-top: 50px;
@@ -70,7 +74,6 @@ body {
   padding: 0.5em;
 }
 
-/*❗❗❗❗trigger :hober specific element{property value}*/
 
 .tweet:hover header{
   background-color: #dddd;
@@ -127,3 +130,22 @@ body {
   color: #00a087;
 }
 
+/*----------      flash message        ----------*/
+.flash-message {
+  background-color: #eeeeff;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 400px;
+  padding: 0.8em;
+  border-radius: 5px;
+}
+
+.flash-message > p {
+  display: inline-flex;
+}
+
+.flash-message > button {
+  /*float: righst;*/
+  background-color: #eeeeff;
+  border: none;
+}

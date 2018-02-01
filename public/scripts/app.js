@@ -6,59 +6,19 @@
 
 
 $().ready(function(){
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
+
+  const escape = function(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
-];
 
   const createTweetElement = function(obj){
       let $tweet = $('<article>').addClass('tweet');
       let name = obj.user.name
       let imgUrl = obj.user.avatars.small
       let handle = obj.handle
-      let content = obj.content.text;
+      let content = escape(obj.content.text);
       let days = Math.floor((Date.now() - obj['created_at']) / 86400000);
       let newTweet = [
         `<header><img src=${imgUrl}></img><h2>${name}</h2><span>${handle}</span></header>`,
@@ -77,5 +37,60 @@ const data = [
     }
   };
 
-  renderTweets(data);
+  $(function loadTweets (){
+    $.ajax({
+      url: '/tweets/',
+      method: 'GET'
+    }).done(function(data){
+      renderTweets(data);
+    })
+  });
+
+//submission listener and handler with flash message
+  $('.new-tweet form input').on('click', function(event) {
+    event.preventDefault();
+//cannot send empty tweet
+    if (!$(this).prev('textarea').val()) {
+      const errorMessage = [
+        '<div class="flash-message">',
+        '<p>Unfortunately! Cannot send empty tweet...</p>',
+        '<button><i class="fa fa-times" aria-hidden="true"></i></button></div>'
+      ];
+      $('.container').prepend(errorMessage.join('')).hide().fadeIn(500);
+    } else if ($(this).prev('textarea').val().length > 140) {
+//cannot send tweet more than 140 characters
+      const errorMessage = [
+        '<div class="flash-message">',
+        '<p>Unfortunately! Cannot send tweet more than 140 characters...</p>',
+        '<button><i class="fa fa-times" aria-hidden="true"></i></button></div>'
+      ];
+      $('.container').prepend(errorMessage.join(''));
+    } else {
+      $('.flash-message').remove();
+      const queryString = $(this).prev('textarea').serialize();
+      $.ajax({
+        url: '/tweets/',
+        method: 'POST',
+        data: queryString
+        }).done(function(newtweet){
+          $newtweet = createTweetElement(newtweet);
+          $('#tweet-container').prepend($newtweet);
+        });
+    };
+  });
+
+//close flash message listener
+  $('main').on('click', '.fa-times', function(){
+    $($(this).parent()).fadeOut(500, function(){
+      $($(this).parent()).remove();
+    });
+  });
+
+//compose handler
+  $('.composeBtn').on('click', function(){
+    $('.new-tweet').slideToggle(function(){
+      $('.new-tweet').children('form').children('textarea').focus();
+    });
+  });
+
 });
