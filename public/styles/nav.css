@@ -7,28 +7,45 @@ nav {
   height: 80px;
   background-color: #00a087;
   color: #e8fdff;
-  padding: 0 2em; }
+  padding: 0 2em;
+  min-width: 360px;
+  box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.2);
+  background: #136a8a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #267871, #136a8a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #267871, #136a8a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 
-nav img {
+nav > img {
   width: 80px;
   height: 80px;
   float: left; }
-nav span {
+
+nav > span {
   float: left;
   margin-left: 10px;
   font-size: 2em;
   line-height: 80px;
   height: 100%;
   vertical-align: middle; }
+
 nav .composeBtn {
-  background-color: #b7f7e5;
-  border: 0.5px solid black;
+  background-color: #6abde4;
+  border: none;
   padding: 1em 0.5em;
   border-radius: 7px;
   float: right;
   margin-top: 0.75em;
-  outline: none; }
-nav .composeBtn:hover {
-  background-color: #eeee; }
+  outline: none;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold; }
 
-/*# sourceMappingURL=test.css.map */
+nav .composeBtn:hover {
+  background-color: #3cc7b4; }
+
+@media screen and (max-width: 420px) {
+  nav {
+    padding: 0 1em; } }
+
+/*# sourceMappingURL=nav.css.map */

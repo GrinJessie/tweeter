@@ -1,15 +1,27 @@
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
 html {
   box-sizing: border-box; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
 
+/*
+ * Global layout stuff
+ */
 body {
   margin: 0;
   color: #244751;
   background-color: #eee;
-  font-family: 'Roboto Condensed', sans-serif; }
+  font-family: 'Roboto Condensed', sans-serif;
+  min-width: 360px; }
 
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ */
 .container {
   width: 450px;
   margin: auto;
@@ -22,7 +34,8 @@ body {
   border: 1px solid lightgrey;
   border-radius: 8px;
   padding: 15px 1em 10px;
-  background-color: #eeee; }
+  background-color: #eeee;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); }
 
 .new-tweet h2 {
   border-bottom: 1px solid grey;
@@ -31,6 +44,15 @@ body {
 .new-tweet textarea {
   width: 100%;
   padding: 5px; }
+
+.new-tweet input {
+  border: initial;
+  border-radius: 3px;
+  outline: none;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); }
+
+.new-tweet input:hover {
+  background-color: #6abde4; }
 
 .new-tweet span {
   float: right; }
@@ -43,11 +65,13 @@ body {
   margin: auto;
   margin-top: 50px;
   border: 1px solid lightgrey;
-  border-radius: 8px; }
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); }
 
 .tweet header {
   background-color: #eeee;
-  padding: 0.5em; }
+  padding: 0.5em;
+  border-radius: 8px 8px 0 0; }
 
 .tweet:hover header {
   background-color: #dddd; }
@@ -108,5 +132,30 @@ body {
   /*float: righst;*/
   background-color: #eeeeff;
   border: none; }
+
+@media screen and (max-width: 830px) {
+  .container {
+    width: 80%; }
+
+  body {
+    min-width: 360px; }
+
+  .container {
+    padding: 140px 15px; }
+
+  #flash-message {
+    width: 90%; } }
+@media screen and (max-width: 420px) {
+  .container {
+    width: 100%; }
+
+  body {
+    min-width: 360px; }
+
+  .container {
+    padding: 140px 15px; }
+
+  #flash-message {
+    width: 90%; } }
 
 /*# sourceMappingURL=layout.css.map */

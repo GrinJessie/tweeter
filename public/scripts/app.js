@@ -20,12 +20,13 @@ $().ready(function(){
     let handle = obj.user.handle;
     let content = escape(obj.content.text);
     let days = Math.floor((Date.now() - obj['created_at']) / 86400000);
+    //the result is false if the login user not liked before
     let newTweet = [
       `<header><img src=${imgUrl}></img><h2>${name}</h2><span>${handle}</span></header>`,
       `<p>${content}</p><footer><p>${days} days ago</p>`,
       '<i class="fa fa-flag" aria-hidden="true"></i>',
       '<i class="fa fa-retweet" aria-hidden="true"></i>',
-      '<i class="fa fa-heart" aria-hidden="true"></i></footer>'
+      `<span><i class="fa fa-heart" data-date-created="${obj['created_at']}" aria-hidden="true"></i></span></footer>`
     ];
     $tweet.append(newTweet.join(''));
     return $tweet;
@@ -73,6 +74,7 @@ $().ready(function(){
       }).done(function(newtweet){
         $newtweet = createTweetElement(newtweet);
         $('#tweet-container').prepend($newtweet);
+        $('#new-tweet-content').val('');
       });
     }
   });
@@ -89,4 +91,21 @@ $().ready(function(){
     });
   });
 
+  //change html prepend,set data-attribute
+  //data-date-created=user.created_At
+
+  //listen for click
+  //grab info on this one(obj.created_At)
+  //Ajax: req to route, how many likes on this one?
+  //display
+
+  $('.fa-heart').on('click', function(){
+    let dateCreated = $(this).data('dateCreated');
+    $.ajax({
+      url: `/tweets/${dateCreated}`,
+      method: POST
+    }).done(function(likes){
+      console.log(likes);
+    });
+  })
 });
