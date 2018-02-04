@@ -20,13 +20,14 @@ $().ready(function(){
     let handle = obj.user.handle;
     let content = escape(obj.content.text);
     let days = Math.floor((Date.now() - obj['created_at']) / 86400000);
+    let numLikes = obj.likes.length;
     //the result is false if the login user not liked before
     let newTweet = [
       `<header><img src=${imgUrl}></img><h2>${name}</h2><span>${handle}</span></header>`,
       `<p>${content}</p><footer><p>${days} days ago</p>`,
       '<i class="fa fa-flag" aria-hidden="true"></i>',
       '<i class="fa fa-retweet" aria-hidden="true"></i>',
-      `<span><i class="fa fa-heart" data-date-created="${obj['created_at']}" aria-hidden="true"></i></span></footer>`
+      `<i class="fa fa-heart" aria-hidden="true" data-date-created="${obj['created_at']}"><span id='likes'>${numLikes}</span></i></footer>`
     ];
     $tweet.append(newTweet.join(''));
     return $tweet;
@@ -99,13 +100,13 @@ $().ready(function(){
   //Ajax: req to route, how many likes on this one?
   //display
 
-  $('.fa-heart').on('click', function(){
+  $('main').on('click', '.fa-heart', function(){
     let dateCreated = $(this).data('dateCreated');
     $.ajax({
       url: `/tweets/${dateCreated}`,
-      method: POST
+      method: 'POST'
     }).done(function(likes){
-      console.log(likes);
+      $('#likes').html(likes.numLikes);
     });
   })
 });

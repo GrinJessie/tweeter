@@ -156,6 +156,9 @@ body {
     padding: 140px 15px; }
 
   #flash-message {
-    width: 90%; } }
+    width: 90%; }
+
+  .tweet header h2 {
+    font-size: 1.2em; } }
 
 /*# sourceMappingURL=layout.css.map */

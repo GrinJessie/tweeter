@@ -30,7 +30,8 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: []
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
@@ -50,22 +51,39 @@ module.exports = function(DataHelpers) {
   //if login user not in []
   //[].length + 1, add user into []
   tweetsRoutes.post('/:timestamp', function(req, res){
-    const dateCreated = req.params.timestamp;
-    DataHelpers.findMatch(dateCreated, (err, results) => {
-      if (err) console.log(err);
-      let match = false;
-      for (let i = 0; i < results.likes.length; i++) {
-        if (results.likes[i] === "@rd") {
-          results.likes.splice(i, 1);
-          match = true;
-          res.send(results.likes.length);
-          break;
-        }
-      }
-      if (!match) {
-        results.likes.push('testUser');
-        res.send(results.likes.length);
-      }
+    const dateCreated = Number(req.params.timestamp);
+    DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+            if (err) console.log('first query', err);
+            const tweet = list[0];
+            let match = false;
+            for (let i = 0; i < tweet.likes.length; i++) {
+              if (tweet.likes[i] === "testUser") {
+                tweet.likes.splice(i, 1);
+                match = true;
+                //find match in db, update this item in db, send it to font-end
+                DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
+                  // if (err) console.log('second query ', err);
+                  DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+                    const tweet = list[0];
+                    res.json({'numLikes':tweet.likes.length});
+                  });
+                });
+              }
+            }
+
+
+            if (!match) {
+              tweet.likes.push('testUser');
+              DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
+                if (err) console.log(list);
+                DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+                  const tweet = list[0];
+                  res.json({'numLikes':tweet.likes.length});
+
+                });
+              });
+            }
+
     });
   });
 

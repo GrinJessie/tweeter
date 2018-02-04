@@ -14,16 +14,27 @@ module.exports = function makeDataHelpers(db) {
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       const sortNewestFirst = (b, a) => a.created_at - b.created_at;
-      db.collection('tweets').find().sort({created_At: 1}).toArray((err, tweets) => {
+      db.collection('tweets').find().toArray((err, tweets) => {
         callback(err, tweets.sort(sortNewestFirst));
       });
-    }
+    },
 
-    findMatch: function(target) {
-      db.collection('tweets').find({created_at: target}).toArray((err, tweets) => {
-        callback(err, tweets);
+    findTweets: function(key, target, callback) {
+      const query = {};
+      query[key] = target;
+      db.collection('tweets').find(query).toArray((err, list) => {
+        callback(err, list);
       });
+    },
+
+    updateTweet: function(key, target, newvalue, callback) {
+      const query = {};
+      query[key] = target;
+      console.log('new likes list ', newvalue);
+      db.collection('tweets').updateOne(query, {$set:{likes:newvalue}}, (err, list) => {
+        callback(list);
+      })
     }
 
-
+  }
 }
