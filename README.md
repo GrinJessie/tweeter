@@ -6,14 +6,16 @@ Tweeter is a simple, single-page Twitter clone
 
 * Tweeter is a simple, single-page Twitter clone using **HTML, CSS, JS, jQuery and AJAX** on the front-end, and **Node, Express and MongoDB** on the back-end. Tweets create **webAPP** user experience with AJAX and data are persisted and survice server restart.
 
-* This project adopt **responsive design** and create great user experience on both Desktop and any mobile devices. The use of **color gradient and box shadow** relif the eye stress and extend user visit duration.
+* This project adopt **responsive design** and create great user experience on both Desktop and any mobile devices. The use of **color gradient, box shadow, nice-looking flash message** relif the eye stress and extend user visit duration.
 
 * Last but not the least, Tweeter supports **like and unlike** feature! Users can see the number of likes for each tweet as well as like or unlike a tweet. All the likes are **persist**.
 
 ## Project DEMO
-![example1](https://github.com/GrinJessie/TinyApp/blob/master/docs/example1.PNG)
-![/urls/new](https://github.com/GrinJessie/TinyApp/blob/master/docs/example2.PNG)
-![/urls](https://github.com/GrinJessie/TinyApp/blob/master/docs/example3.PNG)
+![desktop view default](https://github.com/GrinJessie/tweeter/blob/master/docs/1.PNG)
+![desktop view flash message](https://github.com/GrinJessie/tweeter/blob/master/docs/2.PNG)
+![iphone 7 view](https://github.com/GrinJessie/tweeter/blob/master/docs/3.png)
+![android view](https://github.com/GrinJessie/tweeter/blob/master/docs/4.png)
+![ipad view](https://github.com/GrinJessie/tweeter/blob/master/docs/5.png)
 
 
 ## Getting Started
