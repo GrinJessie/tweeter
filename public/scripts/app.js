@@ -108,5 +108,5 @@ $().ready(function(){
     }).done(function(likes){
       $('#likes').html(likes.numLikes);
     });
-  })
+  });
 });

@@ -1,7 +1,6 @@
 "use strict";
 
-const userHelper    = require("../lib/util/user-helper")
-
+const userHelper    = require("../lib/util/user-helper");
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
@@ -53,36 +52,40 @@ module.exports = function(DataHelpers) {
   tweetsRoutes.post('/:timestamp', function(req, res){
     const dateCreated = Number(req.params.timestamp);
     DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
-            if (err) console.log('first query', err);
+      if (err) {
+        console.log('first query', err);
+      }
+      const tweet = list[0];
+      let match = false;
+      for (let i = 0; i < tweet.likes.length; i++) {
+        if (tweet.likes[i] === "testUser") {
+          tweet.likes.splice(i, 1);
+          match = true;
+          //find match in db, update this item in db, send it to font-end
+          DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
+            // if (err) console.log('second query ', err);
+            DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+              const tweet = list[0];
+              res.json({ 'numLikes': tweet.likes.length});
+            });
+          });
+        }
+      }
+
+
+      if (!match) {
+        tweet.likes.push('testUser');
+        DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
+          if (err) {
+            console.log(list);
+          }
+          DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
             const tweet = list[0];
-            let match = false;
-            for (let i = 0; i < tweet.likes.length; i++) {
-              if (tweet.likes[i] === "testUser") {
-                tweet.likes.splice(i, 1);
-                match = true;
-                //find match in db, update this item in db, send it to font-end
-                DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
-                  // if (err) console.log('second query ', err);
-                  DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
-                    const tweet = list[0];
-                    res.json({'numLikes':tweet.likes.length});
-                  });
-                });
-              }
-            }
+            res.json({ 'numLikes': tweet.likes.length});
 
-
-            if (!match) {
-              tweet.likes.push('testUser');
-              DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
-                if (err) console.log(list);
-                DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
-                  const tweet = list[0];
-                  res.json({'numLikes':tweet.likes.length});
-
-                });
-              });
-            }
+          });
+        });
+      }
 
     });
   });
@@ -91,4 +94,4 @@ module.exports = function(DataHelpers) {
 
   return tweetsRoutes;
 
-}
+};

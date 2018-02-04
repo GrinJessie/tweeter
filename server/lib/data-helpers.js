@@ -14,7 +14,7 @@ module.exports = function makeDataHelpers(db) {
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       const sortNewestFirst = (b, a) => a.created_at - b.created_at;
-      db.collection('tweets').find().toArray((err, tweets) => {
+      db.collection('tweets').find().toray((err, tweets) => {
         callback(err, tweets.sort(sortNewestFirst));
       });
     },
@@ -31,10 +31,10 @@ module.exports = function makeDataHelpers(db) {
       const query = {};
       query[key] = target;
       console.log('new likes list ', newvalue);
-      db.collection('tweets').updateOne(query, {$set:{likes:newvalue}}, (err, list) => {
+      db.collection('tweets').updateOne(query, {$set: { likes: newvalue}}, (err, list) => {
         callback(list);
-      })
+      });
     }
 
-  }
-}
+  };
+};
