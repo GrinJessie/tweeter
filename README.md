@@ -11,10 +11,15 @@ Tweeter is a simple, single-page Twitter clone
 * Last but not the least, Tweeter supports **like and unlike** feature! Users can see the number of likes for each tweet as well as like or unlike a tweet. All the likes are **persist**.
 
 ## Project DEMO
+* desktop view default
 ![desktop view default](https://github.com/GrinJessie/tweeter/blob/master/docs/1.PNG)
+* desktop view flash message
 ![desktop view flash message](https://github.com/GrinJessie/tweeter/blob/master/docs/2.PNG)
+* iphone 7 view
 ![iphone 7 view](https://github.com/GrinJessie/tweeter/blob/master/docs/3.png)
+* android view
 ![android view](https://github.com/GrinJessie/tweeter/blob/master/docs/4.png)
+* ipad view
 ![ipad view](https://github.com/GrinJessie/tweeter/blob/master/docs/5.png)
 
 
