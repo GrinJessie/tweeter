@@ -42,51 +42,55 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  //post, /tweets/:timestamp
-  //loop through, find a tweet
-  //obj.likes = []
-  //if login user in [], if not,
-  //[].length - 1, remove user from []
-  //if login user not in []
-  //[].length + 1, add user into []
-  tweetsRoutes.post('/:timestamp', function(req, res){
+  //feature: route listening for updating likes list
+  tweetsRoutes.put('/:timestamp', function(req, res){
+    //use created date as identification info to query the match in db
     const dateCreated = Number(req.params.timestamp);
-    DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+    const query = {};
+    query['created_at'] = dateCreated;
+    DataHelpers.findTweets(query, (err, list) => {
       if (err) {
-        console.log('first query', err);
+        console.log('first query err ', err);
       }
       const tweet = list[0];
+      //set and change match variable in the loop of finding match
+      //used to perform different action
       let match = false;
       for (let i = 0; i < tweet.likes.length; i++) {
         if (tweet.likes[i] === "testUser") {
+          //if find matched user in likes list
+          //remove this like from list
+          //find and update new likes list in db
+          //send response with the number of likes in the list
           tweet.likes.splice(i, 1);
           match = true;
-          //find match in db, update this item in db, send it to font-end
-          DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
-            // if (err) console.log('second query ', err);
-            DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+          DataHelpers.updateTweet(query, tweet.likes, (err) => {
+            if (err) {
+              console.log('second query err ', err);
+            }
+            DataHelpers.findTweets(query, (err, list) => {
               const tweet = list[0];
               res.json({ 'numLikes': tweet.likes.length});
             });
           });
         }
       }
-
-
+      //if no match found in the loop
+      //push this like to list
+      //find and update new likes list in db
+      //send response with the number of likes in the list
       if (!match) {
         tweet.likes.push('testUser');
-        DataHelpers.updateTweet('created_at', dateCreated, tweet.likes, (err) => {
+        DataHelpers.updateTweet(query, tweet.likes, (err) => {
           if (err) {
-            console.log(list);
+            console.log(err);
           }
-          DataHelpers.findTweets('created_at', dateCreated, (err, list) => {
+          DataHelpers.findTweets(query, (err, list) => {
             const tweet = list[0];
             res.json({ 'numLikes': tweet.likes.length});
-
           });
         });
       }
-
     });
   });
 
